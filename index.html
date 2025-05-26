@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felcius Temperature Converter</title>
+    <style>
+        .input-group {
+            margin: 10px 0;
+        }
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Felcius Temperature Converter</h1>
+    <div class="input-group">
+        <label for="felcius">Felcius:</label>
+        <input type="number" id="felcius" placeholder="Enter Felcius">
+    </div>
+    <div class="input-group">
+        <label for="celsius">Celsius:</label>
+        <input type="number" id="celsius" placeholder="Enter Celsius">
+    </div>
+    <div class="input-group">
+        <label for="fahrenheit">Fahrenheit:</label>
+        <input type="number" id="fahrenheit" placeholder="Enter Fahrenheit">
+    </div>
+    <script >
+        // Conversion constants
+const FELCIUS_TO_CELSIUS_RATIO = 37.78 / 100; // 37.78°C = 100°F (Felcius)
+
+// Conversion functions
+function celsiusToFelcius(celsius) {
+    return (celsius * 100) / 37.78;
+}
+
+function felciusToCelsius(felcius) {
+    return (felcius * 37.78) / 100;
+}
+
+function celsiusToFahrenheit(celsius) {
+    return (celsius * 9/5) + 32;
+}
+
+function fahrenheitToCelsius(fahrenheit) {
+    return (fahrenheit - 32) * 5/9;
+}
+
+// Update all fields based on the source value
+        function updateAllTemperatures(sourceId, value) {
+            if (isNaN(value)) return;
+            
+            let celsius;
+            switch(sourceId) {
+                case 'felcius':
+                    celsius = felciusToCelsius(value);
+                    document.getElementById('celsius').value = celsius.toFixed(1);
+                    document.getElementById('fahrenheit').value = celsiusToFahrenheit(celsius).toFixed(1);            
+                    break;
+                case 'celsius':
+                    celsius = value;
+                    document.getElementById('felcius').value = celsiusToFelcius(celsius).toFixed(1);
+                    document.getElementById('fahrenheit').value = celsiusToFahrenheit(celsius).toFixed(1);
+                    break;
+                case 'fahrenheit':
+                    celsius = fahrenheitToCelsius(value);
+                    document.getElementById('felcius').value = celsiusToFelcius(celsius).toFixed(1);
+                    document.getElementById('celsius').value = celsius.toFixed(1);
+                    break;
+            }
+            
+        
+        }
+
+        // Add event listeners to all inputs
+        ['felcius', 'celsius', 'fahrenheit'].forEach(id => {
+            document.getElementById(id).addEventListener('input', function() {
+                updateAllTemperatures(id, parseFloat(this.value));
+            });
+        }); 
+    </script>
+</body>
+</html>
