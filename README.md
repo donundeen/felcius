@@ -1,7 +1,7 @@
 # felcius
 A Celcius/Fahrenheit/Felcius Converter. super basic
 
-In Felcius, 0C = 0Fl, 100F = 100Fl 
+In Felcius (Fl), 0C = 0Fl, 100F = 100Fl, and values are linearly interpolated between those two values. 
 
 Load the html page from a server or just from a file
 
